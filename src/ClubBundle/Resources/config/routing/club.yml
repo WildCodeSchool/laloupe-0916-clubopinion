@@ -1,0 +1,14 @@
+club_index:
+    path:     /
+    defaults: { _controller: "ClubBundle:Club:index" }
+    methods:  GET
+
+club_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ClubBundle:Club:edit" }
+    methods:  [GET, POST]
+
+club_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ClubBundle:Club:delete" }
+    methods:  DELETE

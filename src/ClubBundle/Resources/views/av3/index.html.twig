@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        {% for av3 in av3s %}
+            <h1>{{ av3.titleAv3 }}</h1>
+
+            <div class="container-fluid">
+                <div class="row blockGray">
+                    <div class="row"><!--**************** 2ème bloc *****************-->
+                        <div class="col-xxs-12 col-xs-6 homepageBlock2">
+                            <p>{{ av3.paragraphAv3|raw  }}</p>
+
+                        </div>
+                        <div class="col-xxs-12 col-xs-6 homepageBlock2">
+                            <img src="{{ vich_uploader_asset(av3, 'image', 'ClubBundle\\Entity\\av3') }}" alt="{{ av3.titleAv3 }}" class="center-block" width="100%"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+{% endblock %}

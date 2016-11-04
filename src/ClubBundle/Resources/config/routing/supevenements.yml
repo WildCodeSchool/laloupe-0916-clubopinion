@@ -1,0 +1,16 @@
+supevenements_index:
+    path:     /
+    defaults: { _controller: "ClubBundle:SupEvenements:index" }
+    methods:  GET
+
+supevenements_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ClubBundle:SupEvenements:edit" }
+    methods:  [GET, POST]
+
+supevenements_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ClubBundle:SupEvenements:delete" }
+    methods:  DELETE
+
+

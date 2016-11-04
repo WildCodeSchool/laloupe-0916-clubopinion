@@ -1,0 +1,14 @@
+evrcvl_index:
+    path:     /
+    defaults: { _controller: "ClubBundle:EvRcvl:index" }
+    methods:  GET
+
+evrcvl_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ClubBundle:EvRcvl:edit" }
+    methods:  [GET, POST]
+
+evrcvl_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ClubBundle:EvRcvl:delete" }
+    methods:  DELETE

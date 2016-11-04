@@ -1,0 +1,14 @@
+pagemembre_index:
+    path:     /
+    defaults: { _controller: "ClubBundle:PageMembre:index" }
+    methods:  GET
+
+pagemembre_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ClubBundle:PageMembre:edit" }
+    methods:  [GET, POST]
+
+pagemembre_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ClubBundle:PageMembre:delete" }
+    methods:  DELETE

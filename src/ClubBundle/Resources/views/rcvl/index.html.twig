@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+        {% for rcvl in rcvls %}
+            <h1>{{ rcvl.title }}</h1>
+
+            <div class="container-fluid">
+                <div class="row blockGray homepageBlock"><!--******************* 1er bloc ***************-->
+                    <div class="col-xxs-12 col-xs-6 homepageBlock2">
+                        <img src="{{ vich_uploader_asset(rcvl, 'image', 'ClubBundle\\Entity\\rcvl') }}" alt="{{ rcvl.title }}" class="center-block" width="100%"/>
+                    </div>
+
+
+                    <div class="col-xxs-12 col-xs-6 homepageBlock2">
+                        <h2>{{ rcvl.soustitre }}</h2>
+
+                        <p>{{ rcvl.paragraph }}</p>
+
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+{% endblock %}

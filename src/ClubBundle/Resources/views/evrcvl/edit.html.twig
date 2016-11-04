@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+    <!-- ********************Navbar!!!*************** -->
+    {% for club in clubs %}
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <div class="navbar-brand">
+                            <a href="{{ path('club_index') }}"><img id="logo" src="{{ asset('bundles/club/img/club_opinion_sans_fond.png') }}" alt="Logo" /></a>
+                        </div>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <br>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home" aria-hidden="true"></i> Accueil <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('club_edit', { 'id': 1 }) }}">{{ club.soustitre11|raw }}</a></li>
+                                    <li><a href="{{ path('presentation_edit', { 'id': 1 }) }}">{{ club.soustitre12|raw }}</a></li>
+                                    <li><a href="{{ path('pagemembre_edit', { 'id': 1 }) }}">{{ club.soustitre13|raw }}</a></li>
+                                    <li><a href="{{ path('rcvl_edit', { 'id': 1 }) }}">{{ club.soustitre14|raw }}</a></li>
+                                    <li><a href="{{ path('ara_edit', { 'id': 1 }) }}">{{ club.soustitre15|raw }}</a></li>
+                                    <li><a href="{{ path('club_sup_edit', { 'id': 1 }) }}">{{ club.soustitre16|raw }}</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i> Nos évènements <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('evrcvl_edit', { 'id': 1 }) }}">{{ club.soustitre21|raw }}</a></li>
+                                    <li><a href="{{ path('evara_edit', { 'id': 1 }) }}">{{ club.soustitre22|raw }}</a></li>
+                                    <li><a href="{{ path('evsup_edit', { 'id': 1 }) }}">{{ club.soustitre23|raw }}</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-trophy" aria-hidden="true"></i> Avantages du club <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('av1_edit', { 'id': 1 }) }}">{{ club.soustitre31|raw }}</a></li>
+                                    <li><a href="{{ path('av2_edit', { 'id': 1 }) }}">{{ club.soustitre32|raw }}</a></li>
+                                    <li><a href="{{ path('av3_edit', { 'id': 1 }) }}">{{ club.soustitre33|raw }}</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ path('contact_edit', { 'id': 1 }) }}"><i class="fa fa-envelope" aria-hidden="true"></i> Contact</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+    {% endfor %}
+    <!-- ********************Fin Navbar************** -->
+{% endblock %}
+
+
+{% block body %}
+    <h1>Mode édition</h1>
+
+    {{ form_start(edit_form) }}
+    {{ form_errors(edit_form) }}
+    <h1>{{ evRcvl.title }}</h1><br>
+    <span class="bold">Titre</span>
+    {{ form_errors(edit_form.title) }}
+    {{ form_widget(edit_form.title) }}
+    <input type="submit" value="Modifier" />
+    {{ form_end(edit_form) }}
+
+    <br>
+
+    <div class="row center-block row-diners">
+        {% for evenement in evenements|reverse %}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="thumbnail">
+                    <div class="caption">
+                        {% if evenement.iname4 %}
+                        <div class="image" style="background-image: url({{ vich_uploader_asset(evenement, 'image4', 'ClubBundle\\Entity\\Evenements') }})"></div>
+                        {% else %}{% endif %}
+                        <br><br>
+                        <h4>{{ evenement.title }}</h4>
+                        <div class="contrainte">
+                            <p>{{ evenement.paragraph|truncate(200, true, '...') }}</p>
+                        </div>
+                        <br>
+                        <a href="{{ path('evenements_edit', { 'id': evenement.id }) }}" class="lienRouge">Modifier</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+        <div class="col-xs-12">
+            <div class="thumbnail" id="thumbnail-membre">
+                <div class="caption">
+                    <h2>Créer un nouvel évènement</h2>
+                    {{ form_start(new_form) }}
+                    <span class="bold">Nom</span><br>
+                    {{ form_errors(new_form.title) }}
+                    {{ form_widget(new_form.title) }}
+                    <br><br>
+                    <span class="bold">Description</span><br>
+                    {{ form_errors(new_form.paragraph) }}
+                    {{ form_widget(new_form.paragraph) }}
+                    <br><br>
+                    <span class="bold">Photos</span><br>
+                    <br><br>
+                    <div class="col-xs-4">
+                        {{ form_errors(new_form.image) }}
+                        {{ form_widget(new_form.image) }}
+                        <br><br>
+                        {{ form_errors(new_form.image2) }}
+                        {{ form_widget(new_form.image2) }}
+                        <br><br>
+                        {{ form_errors(new_form.image3) }}
+                        {{ form_widget(new_form.image3) }}
+                        <br><br>
+                        {{ form_errors(new_form.image4) }}
+                        {{ form_widget(new_form.image4) }}
+                        <br><br>
+                        {{ form_errors(new_form.image5) }}
+                        {{ form_widget(new_form.image5) }}
+                        <br><br>
+                        {{ form_errors(new_form.image6) }}
+                        {{ form_widget(new_form.image6) }}
+                        <br><br>
+                        {{ form_errors(new_form.image7) }}
+                        {{ form_widget(new_form.image7) }}
+                        <br><br>
+                        {{ form_errors(new_form.image8) }}
+                        {{ form_widget(new_form.image8) }}
+                        <br><br>
+                        {{ form_errors(new_form.image9) }}
+                        {{ form_widget(new_form.image9) }}
+                        <br><br>
+                        {{ form_errors(new_form.image10) }}
+                        {{ form_widget(new_form.image10) }}
+                        <br><br>
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_errors(new_form.image11) }}
+                        {{ form_widget(new_form.image11) }}
+                        <br><br>
+                        {{ form_errors(new_form.image12) }}
+                        {{ form_widget(new_form.image12) }}
+                        <br><br>
+                        {{ form_errors(new_form.image13) }}
+                        {{ form_widget(new_form.image13) }}
+                        <br><br>
+                        {{ form_errors(new_form.image14) }}
+                        {{ form_widget(new_form.image14) }}
+                        <br><br>
+                        {{ form_errors(new_form.image15) }}
+                        {{ form_widget(new_form.image15) }}
+                        <br><br>
+                        {{ form_errors(new_form.image16) }}
+                        {{ form_widget(new_form.image16) }}
+                        <br><br>
+                        {{ form_errors(new_form.image17) }}
+                        {{ form_widget(new_form.image17) }}
+                        <br><br>
+                        {{ form_errors(new_form.image18) }}
+                        {{ form_widget(new_form.image18) }}
+                        <br><br>
+                        {{ form_errors(new_form.image19) }}
+                        {{ form_widget(new_form.image19) }}
+                        <br><br>
+                        {{ form_errors(new_form.image20) }}
+                        {{ form_widget(new_form.image20) }}
+                        <br><br>
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_errors(new_form.image21) }}
+                        {{ form_widget(new_form.image21) }}
+                        <br><br>
+                        {{ form_errors(new_form.image22) }}
+                        {{ form_widget(new_form.image22) }}
+                        <br><br>
+                        {{ form_errors(new_form.image23) }}
+                        {{ form_widget(new_form.image23) }}
+                        <br><br>
+                        {{ form_errors(new_form.image24) }}
+                        {{ form_widget(new_form.image24) }}
+                        <br><br>
+                        {{ form_errors(new_form.image25) }}
+                        {{ form_widget(new_form.image25) }}
+                        <br><br>
+                        {{ form_errors(new_form.image26) }}
+                        {{ form_widget(new_form.image26) }}
+                        <br><br>
+                        {{ form_errors(new_form.image27) }}
+                        {{ form_widget(new_form.image27) }}
+                        <br><br>
+                        {{ form_errors(new_form.image28) }}
+                        {{ form_widget(new_form.image28) }}
+                        <br><br>
+                        {{ form_errors(new_form.image29) }}
+                        {{ form_widget(new_form.image29) }}
+                        <br><br>
+                        {{ form_errors(new_form.image30) }}
+                        {{ form_widget(new_form.image30) }}
+                        <br><br>
+                    </div>
+                    <input type="submit" value="Créer" />
+                    {{ form_end(new_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('evrcvl_index') }}" class="lienRouge">Retour à la page visiteur</a>
+
+{% endblock %}

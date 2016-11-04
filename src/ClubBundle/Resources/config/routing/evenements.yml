@@ -1,0 +1,14 @@
+evenements_index:
+    path:     /
+    defaults: { _controller: "ClubBundle:Evenements:index" }
+    methods:  GET
+
+evenements_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ClubBundle:Evenements:edit" }
+    methods:  [GET, POST]
+
+evenements_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ClubBundle:Evenements:delete" }
+    methods:  DELETE
